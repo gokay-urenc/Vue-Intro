@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue</title>
+    <style>
+        .white {
+            color: white;
+        }
+
+        .black {
+            background-color: black;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body class="black">
+    <div id="app" class="white">
+        {{ message }}
+
+        <h1>{{ customMessage }}</h1>
+
+        <input type="text" v-model="userComment" @keyup.enter="addComment"> <!-- v-on:keyup.enter  -->
+        <button class="white black" @click="addComment" v-if="userComment.length > 0">Add</button>
+        <p><strong>{{ userComment }}</strong></p>
+
+        <ul>
+            <li v-for="comment in userComments">
+                {{ comment }}
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello Vue!',
+                customMessage: 'Another Message',
+                userComment: '',
+                userComments: [
+                    'Comment 1',
+                    'Comment 2',
+                    'Comment 3',
+                    'Comment 4',
+                    'Comment 5'
+                ]
+            },
+            methods: {
+                addComment: function () {
+                    this.userComments.push(this.userComment)
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
